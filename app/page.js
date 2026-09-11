@@ -1,38 +1,96 @@
-export default function Home() { return <main style={{padding: 40, fontFamily: "sans-serif"}}><h1>Stock Express</h1><p>Application opérationnelle pour les chauffeurs.</p></main>; }
-export default function DriverPage() {
+'use client';
+import { useState, useEffect } from 'react';
+
+export default function AdminDashboard() {
+  const [expenses, setExpenses] = useState([]);
+
+  // Charger les dépenses enregistrées par les chauffeurs au démarrage
+  useEffect(() => {
+    const savedExpenses = JSON.parse(localStorage.getItem('driver_expenses') || '[]');
+    setExpenses(savedExpenses);
+  }, []);
+
+  // Calcul des totaux pour l'admin
+  const totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
+  const totalTVA = expenses.reduce((acc, curr) => acc + parseFloat(curr.tva || 0), 0);
+
+  const clearHistory = () => {
+    if (confirm("Voulez-vous effacer l'historique des dépenses ?")) {
+      localStorage.removeItem('driver_expenses');
+      setExpenses([]);
+    }
+  };
+
   return (
-    <main style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "500px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "22px", fontWeight: "bold", marginBottom: "5px" }}>STOCK EXPRESS</h1>
-      <p style={{ color: "#666", marginBottom: "20px" }}>Interface Chauffeur - Carburant</p>
-      
-      <div style={{ background: "#f9f9f9", padding: "15px", borderRadius: "8px", border: "1px solid #ddd" }}>
-        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
-          👤 Je suis :
-        </label>
-        <select style={{ width: "100%", padding: "10px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc" }}>
-          <option>-- Choisir mon nom --</option>
-          <option>Chauffeur 1</option>
-          <option>Chauffeur 2</option>
-        </select>
+    <main style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "800px", margin: "0 auto" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+        <div>
+          <h1 style={{ fontSize: "24px", fontWeight: "bold", margin: 0 }}>STOCK EXPRESS</h1>
+          <p style={{ color: "#666", margin: 0 }}>Tableau de bord Administrateur - Gestion</p>
+        </div>
+        <a 
+          href="/driver" 
+          target="_blank" 
+          style={{ background: "#0070f3", color: "#fff", padding: "8px 12px", borderRadius: "5px", textDecoration: "none", fontSize: "14px", fontWeight: "bold" }}
+        >
+          Lien Chauffeur ↗
+        </a>
+      </div>
 
-        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
-          Nouveau Kilométrage :
-        </label>
-        <input type="text" placeholder="Ex: 45200" style={{ width: "100%", padding: "10px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box" }} />
+      {/* Résumé Financier */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px", marginBottom: "25px" }}>
+        <div style={{ background: "#f0f4f8", padding: "15px", borderRadius: "8px", border: "1px solid #d9e2ec" }}>
+          <h3 style={{ margin: "0 0 5px 0", fontSize: "14px", color: "#555" }}>📉 Dépenses Carburant du Jour</h3>
+          <p style={{ fontSize: "22px", fontWeight: "bold", margin: 0, color: "#d32f2f" }}>{totalExpenses.toFixed(2)} €</p>
+        </div>
+        <div style={{ background: "#f0f4f8", padding: "15px", borderRadius: "8px", border: "1px solid #d9e2ec" }}>
+          <h3 style={{ margin: "0 0 5px 0", fontSize: "14px", color: "#555" }}>🧾 TVA Déductible Estimée</h3>
+          <p style={{ fontSize: "22px", fontWeight: "bold", margin: 0, color: "#2e7d32" }}>{totalTVA.toFixed(2)} €</p>
+        </div>
+      </div>
 
-        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
-          Montant du plein (€) :
-        </label>
-        <input type="text" placeholder="0.00" style={{ width: "100%", padding: "10px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box" }} />
+      {/* Liste des tickets reçus des chauffeurs */}
+      <div style={{ background: "#fff", padding: "15px", borderRadius: "8px", border: "1px solid #ddd" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
+          <h2 style={{ fontSize: "18px", margin: 0 }}>📋 Billets de carburant transmis par les chauffeurs</h2>
+          {expenses.length > 0 && (
+            <button 
+              onClick={clearHistory} 
+              style={{ background: "#ff4d4d", color: "#fff", border: "none", padding: "5px 10px", borderRadius: "4px", cursor: "pointer", fontSize: "12px" }}
+            >
+              Effacer l'historique
+            </button>
+          )}
+        </div>
 
-        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
-          📸 Photo du ticket :
-        </label>
-        <input type="file" style={{ marginBottom: "20px", display: "block" }} />
-
-        <button style={{ width: "100%", background: "#000", color: "#fff", padding: "12px", border: "none", borderRadius: "5px", fontWeight: "bold", cursor: "pointer" }}>
-          Envoyer le ticket
-        </button>
+        {expenses.length === 0 ? (
+          <p style={{ color: "#777", fontStyle: "italic" }}>Aucun ticket reçu pour le moment. Testez l'interface chauffeur via le lien ci-dessus !</p>
+        ) : (
+          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "14px" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid #eee", background: "#f9f9f9" }}>
+                <th style={{ padding: "10px" }}>Date</th>
+                <th style={{ padding: "10px" }}>Chauffeur</th>
+                <th style={{ padding: "10px" }}>Immatriculation</th>
+                <th style={{ padding: "10px" }}>Kilométrage</th>
+                <th style={{ padding: "10px" }}>Montant</th>
+                <th style={{ padding: "10px" }}>TVA (20%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {expenses.map((item) => (
+                <tr key={item.id} style={{ borderBottom: "1px solid #eee" }}>
+                  <td style={{ padding: "10px" }}>{item.date}</td>
+                  <td style={{ padding: "10px", fontWeight: "500" }}>{item.driver}</td>
+                  <td style={{ padding: "10px" }}><code>{item.plate}</code></td>
+                  <td style={{ padding: "10px" }}>{item.mileage} km</td>
+                  <td style={{ padding: "10px", fontWeight: "bold" }}>{item.amount} €</td>
+                  <td style={{ padding: "10px", color: "#2e7d32" }}>{item.tva} €</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </main>
   );
