@@ -8,7 +8,6 @@ export default function DriverPage() {
   const [amount, setAmount] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Association automatique entre le prénom et la plaque d'immatriculation
   const driverVehicleMap = {
     "DAVID": "AB-123-CD",
     "YAMINE": "EF-456-GH",
@@ -43,7 +42,6 @@ export default function DriverPage() {
 
     const existingExpenses = JSON.parse(localStorage.getItem('driver_expenses') || '[]');
     localStorage.setItem('driver_expenses', JSON.stringify([newExpense, ...existingExpenses]));
-
     setSubmitted(true);
   };
 
