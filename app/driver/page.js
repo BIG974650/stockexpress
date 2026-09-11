@@ -8,9 +8,17 @@ export default function DriverPage() {
   const [amount, setAmount] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  // Liste des plaques d'immatriculation de votre flotte (vous pouvez modifier les plaques ici)
+  const vehiclePlates = [
+    "AB-123-CD",
+    "EF-456-GH",
+    "JK-789-LM",
+    "XY-999-ZZ"
+  ];
+
   const handleSend = () => {
     if (!driver || !plate || !mileage || !amount) {
-      alert("Veuillez remplir tous les champs (Prénom, Immatriculation, Kilométrage, Montant).");
+      alert("Veuillez remplir tous les champs (Prénom, Plaque, Kilométrage, Montant).");
       return;
     }
 
@@ -66,13 +74,16 @@ export default function DriverPage() {
         </select>
 
         <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>🚗 Plaque d'immatriculation :</label>
-        <input 
-          type="text" 
-          placeholder="Ex: AB-123-CD" 
+        <select 
           value={plate}
           onChange={(e) => setPlate(e.target.value)}
-          style={{ width: "100%", padding: "12px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box", background: "#fff", fontSize: "16px" }} 
-        />
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", background: "#fff", fontSize: "16px" }}
+        >
+          <option value="">-- Choisir la plaque du véhicule --</option>
+          {vehiclePlates.map((p, index) => (
+            <option key={index} value={p}>{p}</option>
+          ))}
+        </select>
 
         <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>📊 Nouveau Kilométrage :</label>
         <input 
