@@ -47,33 +47,9 @@ export default function DriverPage() {
       
 Ticket envoye avec succes !
 Merci {driver} ({plate}).
-   { setSubmitted(false); setMileage(''); setAmount(''); setPlate(''); setDriver(''); }} style={{ background: "#000", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "5px" }}>
-    Nouveau ticket
-);
-}
-return (
-STOCK EXPRESS
-Interface Chauffeur
-Qui es-tu ?
-
--- Choisir --
-
-DAVID
-
-YAMINE
-
-RAPHAEL
-Envoyer
-  Plaque d'immatriculation :
+     { setSubmitted(false); setMileage(''); setAmount(''); setPlate(''); setDriver(''); }} style={{ background: "#000", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+      Nouveau ticket
+    
   
-
-  Kilometrage :
-   setMileage(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px" }} />
-
-  Montant (€) :
-   setAmount(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px" }} />
-
-  
-    Envoyer
 );
 }
