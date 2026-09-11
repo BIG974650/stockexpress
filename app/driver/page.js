@@ -10,10 +10,10 @@ export default function DriverPage() {
 
   // Liste des plaques d'immatriculation de votre flotte (vous pouvez modifier les plaques ici)
   const vehiclePlates = [
-    "AB-123-CD",
-    "EF-456-GH",
-    "JK-789-LM",
-    "XY-999-ZZ"
+    "DC-336-PV",
+    "HM-067-AJ",
+    "DOUSSY LOC",
+    
   ];
 
   const handleSend = () => {
