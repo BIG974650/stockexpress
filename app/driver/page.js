@@ -49,37 +49,3 @@ export default function DriverPage() {
 
   if (submitted) {
     return (
-      
-✅ Ticket envoyé avec succès !
-Merci {driver} ({plate}), tes informations ont bien été transmises.
-   { setSubmitted(false); setMileage(''); setAmount(''); setPlate(''); setDriver(''); }}
-    style={{ background: "#000", color: "#fff", padding: "12px 20px", border: "none", borderRadius: "5px", fontWeight: "bold", cursor: "pointer", width: "100%" }}
-  >
-    Saisir un autre ticket
-);
-}
-return (
-STOCK EXPRESS
-Interface Chauffeur - Carburant
-👋 Bien le bonjour à toi, qui es-tu ?
-
-Q: 
-A: (no selection)
-🚗 Plaque d'immatriculation (attitrée) :
-
-📊 Nouveau Kilométrage :
-setMileage(e.target.value)}
-style={{ width: "100%", padding: "12px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box", background: "#fff", fontSize: "16px" }}
-/>
-
-💶 Montant du plein (€) :
-setAmount(e.target.value)}
-style={{ width: "100%", padding: "12px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", boxSizing: "border-box", background: "#fff", fontSize: "16px" }}
-/>
-
-📸 Photo du ticket :
-
-Envoyer le ticket
-
-);
-}
