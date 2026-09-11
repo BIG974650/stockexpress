@@ -60,9 +60,9 @@ export default function DriverPage() {
           style={{ width: "100%", padding: "12px", marginBottom: "15px", borderRadius: "5px", border: "1px solid #ccc", background: "#fff", fontSize: "16px" }}
         >
           <option value="">-- Choisir ton prénom --</option>
-          <option value="David">David</option>
-          <option value="Thomas">Thomas</option>
-          <option value="Alexandre">Alexandre</option>
+          <option value="DAVID">DAVID</option>
+          <option value="YAMINE">YAMINE</option>
+          <option value="RAPHAEL">RAPHAEL</option>
         </select>
 
         <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>🚗 Plaque d'immatriculation :</label>
