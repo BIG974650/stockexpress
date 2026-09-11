@@ -26,7 +26,7 @@ export default function DriverPage() {
 
   const handleSend = () => {
     if (!driver || !plate || !mileage || !amount) {
-      alert("Veuillez remplir tous les champs.");
+      alert("Remplissez tous les champs.");
       return;
     }
     const newExpense = {
@@ -47,9 +47,7 @@ export default function DriverPage() {
       
 Ticket envoye avec succes !
 Merci {driver} ({plate}).
-   { setSubmitted(false); setMileage(''); setAmount(''); setPlate(''); setDriver(''); }} 
-    style={{ background: "#000", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }}
-  >
+   { setSubmitted(false); setMileage(''); setAmount(''); setPlate(''); setDriver(''); }} style={{ background: "#000", color: "#fff", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" }}>
     Nouveau ticket
 );
 }
@@ -67,19 +65,14 @@ YAMINE
 RAPHAEL
 Envoyer
   Plaque d'immatriculation :
-  
+      
 
-  Kilometrage :
-   setMileage(e.target.value)} 
-    style={{ width: "100%", padding: "10px", marginBottom: "15px" }} 
-  />
+      Kilometrage :
+       setMileage(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px" }} />
 
-  Montant (€) :
-   setAmount(e.target.value)} 
-    style={{ width: "100%", padding: "10px", marginBottom: "15px" }} 
-  />
+      Montant (€) :
+       setAmount(e.target.value)} style={{ width: "100%", padding: "10px", marginBottom: "15px" }} />
 
-  
-    Envoyer
-);
+      
+        Envoyer
 }
