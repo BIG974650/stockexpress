@@ -7,4 +7,4 @@ const queryParams = new URLSearchParams({
   amount
 });
 
-await fetch(`https://script.google.com/macros/s/.../exec?${queryParams.toString()}`);
+await fetch(`https://script.google.com/macros/s/AKfycbz3toxMG7GneWerN16YxlhKV-0R1PV_FmeV4aVEW.../exec?${queryParams.toString()}`);
